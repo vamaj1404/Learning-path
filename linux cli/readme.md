@@ -27,4 +27,6 @@ kil 1337 [stop pid 1337]
 systemctl [stop/start/enable/disable system and service]  
 & end of process or Ctrl+z [run in background]  
 fg [ bring bg process to foreground]  
+cron  
+crontab -e [show crons]  
 

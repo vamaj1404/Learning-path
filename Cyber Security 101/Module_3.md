@@ -49,7 +49,22 @@ System Configuration : Has a lot of system tools such as
   - sfc /scannow: scans system files for corruption and repairs them if possible.
   - some_command | more [pipe command]
 
-## Windows fundamentals 3
+## Windows fundamentals 3  
+task2: windows update > view update history > 5/3/2021  
+task3: settings > windows security > virus & threat protection  
+task4: real-time protection is off   
+task5: firewall protect what can pass through ports . public network  
+task6: app&browser controll in windows security   
+task7: device security : core isolation / memory integrity /   
+		security processor / trusted platform module : phisical security processor for more protection and encryption    
+task8: Bitlocker : encryption to protect data on computer  / answer: USB startup key  
+task9: shadow copy / snapshot .. my pc > r-click on partition > config shadow copies > good but vulnarable in malwares .  
+better way: offline copy  
+answer: volume shadow copy service  
+
+
+		
+
 
     
 

@@ -1,4 +1,4 @@
-#  Linux CLI  
+#  Linux  
 https://tryhackme-images.s3.eu-west-1.amazonaws.com/room-icons/1773400244147-linuxfundamentalspart1.png  
 pwd  
 ls  

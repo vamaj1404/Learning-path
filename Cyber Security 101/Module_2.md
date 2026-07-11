@@ -16,6 +16,20 @@ mv file NEW_PATH [move file]
 su user2 [switch to user 2]  
 /var/logs [directory of logs]  
 /tmp [is similar to RAM]  
+## File permissions
+ls -lh : list of files with permssion  
+permisions: read write execution (rwe)  
+r=4 w=2 e=1 
+3first: owner 3next:group 3last:others  
+rwxr-xr-x : 755 
+rw-r--r-- : 644  
+rwx------ :700
+chmod 750 system_overview.txt  
+## Directories
+/etc : store system files that are used by your operating system.  
+/var :  data that is frequently accessed or written by services or applications running on the system like log files.  
+/root : home directory for root user  
+
 
 # Linux Fundamentals Part 3   
 scp user@ip:/server_file_PATH local_file_PATH [transfer file from server]  

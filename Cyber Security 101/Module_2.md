@@ -32,15 +32,22 @@ chmod 750 system_overview.txt
 
 
 # Linux Fundamentals Part 3   
+editors: nano / vim  or "echo >"   
 scp user@ip:/server_file_PATH local_file_PATH [transfer file from server]  
 ip a [get ip from inet]  
 python3 -m http.server [run server on port 8000]  
 ps [show running processes in a session]  
-ps aux [other user session process]  
+ps aux [other user session process] 
+top [shows real time running process every 10 sec]  
+
 kil 1337 [stop pid 1337]  
 systemctl [stop/start/enable/disable system and service]  
+systemctl [option] [service] :systemctl start apache2    
 & end of process or Ctrl+z [run in background]  
-fg [ bring bg process to foreground]  
+fg [ bring bg process to foreground]  - we can see background process with ps last column  
+
 cron  
 crontab -e [show crons]  
+example: 0 */12 * * * cp -R /home/cmnatic/Documents /var/backups/  
+
 

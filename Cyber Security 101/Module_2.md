@@ -49,5 +49,7 @@ fg [ bring bg process to foreground]  - we can see background process with ps la
 cron  
 crontab -e [show crons]  
 example: 0 */12 * * * cp -R /home/cmnatic/Documents /var/backups/  
+example2: @reboot /var/opt/processes.sh  [runs at reboot]  
+
 
 

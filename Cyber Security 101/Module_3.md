@@ -62,6 +62,20 @@ task9: shadow copy / snapshot .. my pc > r-click on partition > config shadow co
 better way: offline copy  
 answer: volume shadow copy service  
 
+## Active directory
+search : 	
+acrive direcory	... : make Organizational Unit for server / workstaions etc	 
+group policy management	: to link policies to Organizational Units  
+to change policy: r-click > edit > ... for exaple: Computer Configurations -> Policies -> Windows Setting -> Security Settings -> Account Policies -> Password Policy for minimum pass lenghth  
+GPOs are distributed to the network via a network share called ‍‍‍‍‍‍`SYSVOL`  
+The SYSVOL share points by default to the `C:\Windows\SYSVOL\sysvol\`  
+change has been made to any GPOs, it might take up to 2 hours for computers to catch up. to firce : `PS C:\> gpupdate /force`  
+
+
+
+
+
+
 
 		
 

@@ -68,8 +68,16 @@ acrive direcory	... : make Organizational Unit for server / workstaions etc
 group policy management	: to link policies to Organizational Units  
 to change policy: r-click > edit > ... for exaple: Computer Configurations -> Policies -> Windows Setting -> Security Settings -> Account Policies -> Password Policy for minimum pass lenghth  
 GPOs are distributed to the network via a network share called ‍‍‍‍‍‍`SYSVOL`  
+task6:  
 The SYSVOL share points by default to the `C:\Windows\SYSVOL\sysvol\`  
 change has been made to any GPOs, it might take up to 2 hours for computers to catch up. to firce : `PS C:\> gpupdate /force`  
+to apply polycies:  
+- first find and enable policy e.g.  
+  <img width="919" height="565" alt="image" src="https://github.com/user-attachments/assets/d5af591f-757a-41e8-94a7-6e9684da9cf1" />
+- then link to users:
+  <img width="923" height="619" alt="image" src="https://github.com/user-attachments/assets/40e5d534-4411-4da9-a9f8-c4ccd43a1276" />
+`gpupdate /force` to force GPOs to be updated  
+task7:
 
 
 

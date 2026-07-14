@@ -40,3 +40,19 @@ example :  `Get-ChildItem | Sort-Object Length -Descending | Select-Object -Firs
 
 `Find-Module -Name "PowerShell*"` finds modules onlne  (NEED INTERNET)  
 `Install-Module -Name "PowerShellGet"` install it (NEED INTERNET)  
+### task 6 : system and networking  
+`Get-ComputerInfo`  
+`Get-LocalUser`  
+`ipconfig` and `Get-NetIPConfiguration`  
+`Get-NetIPAddress`  specific details about the IP addresses assigned to the network interfaces  
+
+### task7 real-time analysis
+`Get-Process` provides a detailed view of all currently running processes  
+`Get-Service` status of services  
+`Get-NetTCPConnection` displays current TCP connections.  it can uncover hidden backdoors or established connections    
+`Get-FileHash` as a useful cmdlet for generating file hashes, which is particularly valuable in incident response  
+
+### task 8
+`Invoke-Command` is essential for executing commands on remote systems, making it fundamental for system administrators, security engineers and penetration testers  
+`Get-Help Invoke-Command -examples`  
+

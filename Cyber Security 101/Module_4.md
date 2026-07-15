@@ -56,3 +56,13 @@ example :  `Get-ChildItem | Sort-Object Length -Descending | Select-Object -Firs
 `Invoke-Command` is essential for executing commands on remote systems, making it fundamental for system administrators, security engineers and penetration testers  
 `Get-Help Invoke-Command -examples`  
 
+## Linux Shell
+`echo $SHELL` To see which shell you are using,  
+`cat /etc/shells` ist down the available shells   
+then type the name and it will open ...   
+`chsh -s /usr/bin/zsh` :  makes this shell as the default shell for your terminal.  
+### Bash
+default in linux  
+complete command with `tab`  
+can see hystory by : `history`  
+

@@ -65,4 +65,45 @@ then type the name and it will open ...
 default in linux  
 complete command with `tab`  
 can see hystory by : `history`  
+#### task 4
+`nano first_script.sh`  
+in first line : `#!/bin/bash`  
+`#!/bin/bash`  
+`echo "Hey, what’s your name?"`  
+`read name` > for input
+`echo "Welcome, $name"`  
+
+`chmod +x first_script.sh` > make executable  
+`./` for execute : `./first_script.sh`  
+
+Loop:
+```
+for i in {1..10};
+do
+echo $i
+done
+```
+
+```
+if [ "$name" = "Stewart" ]; then
+        echo "Welcome Stewart! Here is the secret: THM_Script"
+else
+        echo "Sorry! You are not authorized to access the secret."
+fi
+```
+
+comment: `#`  
+
+locker:
+```
+if [ "$username" = "John" ] && [ "$companyname" = "Tryhackme" ] && [ "$pin" = "7385" ]; then
+        echo "Authentication Successful. You can now access your locker, John."
+else
+        echo "Authentication Denied!!"
+fi
+```
+
+`sudo su` become root user  
+
+
 

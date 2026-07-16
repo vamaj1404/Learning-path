@@ -143,5 +143,71 @@ telnet <TARGET_IP> 143
 A LOGIN <user> <password>
 B SELECT inbox
 C FETCH 4 body[]
-D LOGOUT
 ```
+
+## 4-Networking Secure Protocols
+### TLS Basics
+
+- TLS is the secure successor to **SSL**.
+- Provides:
+  - **Confidentiality** (encrypts data)
+  - **Integrity** (prevents data modification)
+- Secure protocols:
+  - HTTP → **HTTPS**
+  - SMTP → **SMTPS**
+  - POP3 → **POP3S**
+  - IMAP → **IMAPS**
+
+### Certificates
+
+- Servers use **digital certificates** to prove their identity.
+- Certificates are signed by a **Certificate Authority (CA)**.
+- **Let's Encrypt** provides free trusted certificates.
+- **Self-signed certificates are not trusted** for verifying server identity.
+
+### HTTPS Basics
+
+- **HTTPS = HTTP + TLS** (default port: **443**)
+- Connection flow:
+  1. TCP Handshake
+  2. TLS Handshake
+  3. Encrypted HTTP communication
+- Without the TLS key, Wireshark only shows **encrypted Application Data**.
+- With the decryption key, HTTPS traffic can be decrypted and inspected.
+- TLS secures HTTP without changing the HTTP or TCP protocols.
+D LOGOUT
+
+### SSH Basics
+
+- **SSH** is the secure replacement for **Telnet** (default port: **22**).
+- Provides:
+  - Encrypted communication
+  - Secure authentication (password, public key, 2FA)
+  - Data integrity
+  - SSH Tunneling
+  - X11 Forwarding
+
+### Connect
+
+```bash
+ssh <user>@<host>
+```
+
+> **OpenSSH** is the most common open-source implementation of SSH.
+
+### SFTP Basics
+
+- **SFTP (SSH File Transfer Protocol)** uses **SSH** for secure file transfer (default port: **22**).
+- Common commands:
+  - `get` → Download a file
+  - `put` → Upload a file
+
+```bash
+sftp <user>@<host>
+```
+
+### SFTP vs FTPS
+
+- **SFTP** → Uses **SSH** (Port **22**).
+- **FTPS** → Uses **TLS/SSL** (Usually Port **990**) and requires a valid certificate.
+- SFTP is generally easier to configure than FTPS.

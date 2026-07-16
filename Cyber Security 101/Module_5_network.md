@@ -10,4 +10,6 @@ ARP  is considered layer 2 because it deals with MAC addresses
 
 Network Address Translation (NAT) :  one public IP address to provide Internet access to many private IP addresses  
 
+## 3- Networking Core Protocols
+`nslookup` : look up the IP address of a domain  
 

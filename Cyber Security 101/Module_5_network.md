@@ -211,3 +211,24 @@ sftp <user>@<host>
 - **SFTP** → Uses **SSH** (Port **22**).
 - **FTPS** → Uses **TLS/SSL** (Usually Port **990**) and requires a valid certificate.
 - SFTP is generally easier to configure than FTPS.
+
+
+## 5-Wireshark: The Basics
+It only allows analysts to discover and investigate the packets in depth. It also doesn't modify packets; it reads them.   
+wireshark has coloring rules : view > coloring rules  
+<img width="94" height="37" alt="image" src="https://github.com/user-attachments/assets/e1fc87b0-f4e3-4616-a9ac-28c402373d16" />  start, stop , restart network sniffing  
+File>merge : for merging pcap files  
+Statistics --> Capture File Properties : for file details [or use left down icon in the window]  
+
+**Severity 	Colour 	Info**
+- Chat 	**Blue** 	Information on usual workflow.
+- Note 	**Cyan** 	Notable events like application error codes.
+- Warn 	**Yellow** 	Warnings like unusual error codes or problem statements.
+- Error 	**Red** 	Problems like malformed packets.
+
+Frequently encountered information groups are listed in the table below. You can refer to Wireshark's official documentation (opens in new tab) for more information on the expert information entries.
+- Group 	Info 	Group 	Info
+- Checksum 	Checksum errors 	Deprecated 	Deprecated protocol usage
+- Comment 	Packet comment detection 	Malformed 	Malformed packet detection
+
+You can use the "lower left bottom section" in the status bar or "Analyse --> Expert Information" menu to view all available information entries via a dialogue box. It will show the packet number, summary, group protocol and total occurrence.  

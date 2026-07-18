@@ -330,3 +330,25 @@ ip.addr == 192.168.1.2
 ip.src == 192.168.1.2
 ip.dst == 192.168.1.2
 ```
+
+### Tcpdump Basics
+
+- **tcpdump** is a lightweight **command-line** packet capture tool.
+- It uses the **libpcap** library to capture network traffic.
+- Main uses:
+  - Capture packets
+  - Save traffic to `.pcap` files
+  - Filter packets
+  - Control packet output
+
+#### Tcpdump vs Wireshark
+
+| Tcpdump | Wireshark |
+|---------|-----------|
+| CLI | GUI |
+| Lightweight & fast | Powerful packet analysis |
+| Best for capturing traffic | Best for analyzing traffic |
+
+> A common workflow is to **capture packets with tcpdump** and **analyze them later in Wireshark**.
+
+

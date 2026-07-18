@@ -351,4 +351,135 @@ ip.dst == 192.168.1.2
 
 > A common workflow is to **capture packets with tcpdump** and **analyze them later in Wireshark**.
 
+## 6-Tcpdump: The Basics
+
+`tcpdump` is a command-line packet analyzer used to capture and inspect network traffic. In real-world scenarios, you should specify the network interface, capture destination, packet count, and output format.
+
+### Common Options
+
+| Command                | Description                                               |
+| ---------------------- | --------------------------------------------------------- |
+| `tcpdump -i INTERFACE` | Captures packets on a specific network interface          |
+| `tcpdump -i any`       | Captures packets on all available interfaces              |
+| `tcpdump -w FILE`      | Writes captured packets to a file, usually a `.pcap` file |
+| `tcpdump -r FILE`      | Reads and displays packets from a capture file            |
+| `tcpdump -c COUNT`     | Stops after capturing a specific number of packets        |
+| `tcpdump -n`           | Disables IP address-to-hostname resolution                |
+| `tcpdump -nn`          | Disables both hostname and port/service name resolution   |
+| `tcpdump -v`           | Displays more packet details                              |
+| `tcpdump -vv` / `-vvv` | Increases the level of output verbosity                   |
+
+To list the available network interfaces:
+
+```bash
+ip address show
+```
+
+Short version:
+
+```bash
+ip a s
+```
+
+### Examples
+
+#### 1. Capture and display 50 packets
+
+```bash
+sudo tcpdump -i eth0 -c 50 -v
+```
+
+This command listens on the `eth0` interface, captures 50 packets, and displays additional packet details.
+
+#### 2. Capture packets and save them to a file
+
+```bash
+sudo tcpdump -i wlo1 -w data.pcap
+```
+
+This command captures traffic on the `wlo1` Wi-Fi interface and saves it to `data.pcap`. The capture continues until it is stopped with `CTRL+C`.
+
+The saved packets can be read later with:
+
+```bash
+tcpdump -r data.pcap
+```
+
+They can also be analyzed using tools such as Wireshark.
+
+#### 3. Capture traffic on all interfaces without name resolution
+
+```bash
+sudo tcpdump -i any -nn
+```
+
+This command captures packets on all network interfaces and displays IP addresses and port numbers in numeric form without performing DNS or service-name lookups.
+
+### Packet Filtering
+
+Running `tcpdump` without filters may produce too much output to analyze effectively. Filters allow you to capture only the traffic related to a specific host, port, protocol, source, or destination.
+
+#### Common Filtering Expressions
+
+| Filter                       | Description                                               |
+| ---------------------------- | --------------------------------------------------------- |
+| `host IP` or `host HOSTNAME` | Captures packets sent to or received from a specific host |
+| `src host IP`                | Captures packets originating from a specific host         |
+| `dst host IP`                | Captures packets sent to a specific host                  |
+| `port PORT_NUMBER`           | Captures packets sent to or received from a specific port |
+| `src port PORT_NUMBER`       | Captures packets originating from a specific port         |
+| `dst port PORT_NUMBER`       | Captures packets sent to a specific destination port      |
+| `tcp`                        | Captures TCP packets                                      |
+| `udp`                        | Captures UDP packets                                      |
+| `icmp`                       | Captures ICMP packets                                     |
+| `ip`                         | Captures IPv4 packets                                     |
+| `ip6`                        | Captures IPv6 packets                                     |
+| `and`                        | Matches packets when both conditions are true             |
+| `or`                         | Matches packets when either condition is true             |
+| `not`                        | Excludes packets that match a condition                   |
+
+### Practical Examples
+
+#### 1. Capture SSH Traffic on All Interfaces
+
+```bash
+sudo tcpdump -i any tcp port 22 -nn
+```
+
+This command:
+
+* Listens on all available network interfaces.
+* Captures only TCP traffic on port `22`.
+* Displays IP addresses and port numbers without name resolution.
+
+#### 2. Capture DNS Traffic on a Wi-Fi Interface
+
+```bash
+sudo tcpdump -i wlo1 udp port 53 -n
+```
+
+This command:
+
+* Listens on the `wlo1` Wi-Fi interface.
+* Captures UDP-based DNS traffic on port `53`.
+* Disables hostname resolution to improve speed and readability.
+
+#### 3. Capture HTTPS Traffic for a Specific Host
+
+```bash
+sudo tcpdump -i eth0 host example.com and tcp port 443 -w https.pcap
+```
+
+This command:
+
+* Listens on the `eth0` interface.
+* Captures traffic exchanged with `example.com`.
+* Filters only TCP traffic using port `443`.
+* Saves the captured packets to `https.pcap` for later analysis.
+
+The saved capture can be read with:
+
+```bash
+tcpdump -r https.pcap -nn
+```
 

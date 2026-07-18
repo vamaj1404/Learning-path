@@ -240,3 +240,93 @@ use `Go` menu to see specific packet by number
 "right-click menu" or "Analyse --> Conversation Filter" menu to filter conversations.  
 **note**:conversation shows server and cliend packets but apply as filter just a specific packet  
 "right-click menu" or "View --> Colourise Conversation" : lice conversation but dont remove other packets  
+
+### Wireshark - Display Filters
+
+#### Display Filters
+
+Wireshark provides **Display Filters** to reduce noise and focus on the traffic you need.
+
+> 💡 Tip: **If you can click it, you can filter or copy it.**
+
+---
+
+#### Useful Right-Click Options
+
+##### Apply as Filter
+Filters packets based on a **single selected field**.
+
+**Example:**
+- `ip.src == 192.168.1.10`
+
+---
+
+##### Conversation Filter
+Shows the **entire conversation** (both request and response) between two endpoints.
+
+Useful for analyzing a complete communication session.
+
+---
+
+##### Colourise Conversation
+Highlights all packets in the same conversation **without hiding other packets**.
+
+---
+
+##### Prepare as Filter
+Creates a filter but **does not apply it immediately**. You can edit it before pressing **Enter**.
+
+---
+
+##### Apply as Column
+Adds the selected field as a **new column** in the packet list, making it easier to compare values across packets.
+
+---
+
+##### Follow Stream
+Reconstructs the full application-level conversation (TCP, HTTP, etc.).
+
+Useful for viewing:
+- HTTP requests/responses
+- FTP commands
+- Plaintext usernames & passwords (if not encrypted)
+
+> Server traffic is **Blue**, client traffic is **Red**.
+
+---
+
+#### Common Display Filters
+
+##### Filter by Protocol
+
+```text
+http
+dns
+tcp
+udp
+ftp
+smtp
+imap
+arp
+dhcp
+```
+
+##### Filter by Port
+
+```text
+tcp.port == 80
+udp.port == 53
+```
+
+##### Filter by IP Address
+
+```text
+ip.addr == 192.168.1.2
+```
+
+##### Filter by Source/Destination
+
+```text
+ip.src == 192.168.1.2
+ip.dst == 192.168.1.2
+```

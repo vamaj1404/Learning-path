@@ -232,3 +232,11 @@ Frequently encountered information groups are listed in the table below. You can
 - Comment 	Packet comment detection 	Malformed 	Malformed packet detection
 
 You can use the "lower left bottom section" in the status bar or "Analyse --> Expert Information" menu to view all available information entries via a dialogue box. It will show the packet number, summary, group protocol and total occurrence.  
+
+use `Go` menu to see specific packet by number  
+
+### Packet filtering
+"right-click menu" or "Analyse --> Apply as Filter" menu to filter the specific value  
+"right-click menu" or "Analyse --> Conversation Filter" menu to filter conversations.  
+**note**:conversation shows server and cliend packets but apply as filter just a specific packet  
+"right-click menu" or "View --> Colourise Conversation" : lice conversation but dont remove other packets  

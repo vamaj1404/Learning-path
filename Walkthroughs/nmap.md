@@ -1,48 +1,133 @@
 https://tryhackme.com/room/furthernmap?vccr=3
 
 # NMAP
+
 ## Basics
-ports: when we connect to port 443 in server . our computer maybe open a port with random number like 43556  
-total port: 65535  
-help: nmap -map or man nmap  
--p- : scan all ports  
--p 80 : port 80 scan  
--T5 : timing- more is faster  
--A : very deep and resource using scan. aggressive scan  
--oN : see output in normalmode  
--v : increase verbosity to better understanding  
-### most useful:
--sT :TCP Connect Scans (-sT)  
--sS :SYN "Half-open" Scans (-sS) - faster and hider need sudo     
--sU :UDP Scans (-sU) - open|filtered - it suspects that the port is open, but it could be firewalled  
-	nmap -sU --top-ports 20 <target> : becasue udp scan is soo slow   
 
-by TCP port scanning three answers are :  
-syn/ack - RST - nothing  
-it means : open - close/firewall - firewall  
--sS is half open because shows closed and firewall but not open ports completely  
+When we connect to port `443` on a server, our computer opens a temporary port with a random number, such as `43556`.
 
--sN / -sF / -sX send packets with other or null flag . so can bypass firewalls in modern systems  
--sn : ping sweep : for ip range : nmap -sn 192.168.0.0/24  
+Nmap can scan ports `1` to `65535`.
 
+Help:
 
-### Nmap Scripting Engine (NSE)
-Lua programming language  
-If the command --script=safe is run, then any applicable safe scripts will be run against the target  
---script=smb-enum-users,smb-enum-shares  
-example: nmap -p 80 --script http-put --script-args http-put.url='/dav/shell.php',http-put.file='./shell.php'  
+```bash
+nmap --help
+```
 
-Your typical Windows host will, with its default , block all ICMP packets. so :   
--Pn: which tells Nmap to not bother pinging the host before scanning it. BUT WITH MORE TIME TO SCAN  
-in local net: Nmap can also use ARP requests to determine host activity.  
-more details for firewall evation: https://nmap.org/book/man-bypass-firewalls-ids.html  
--f:- Used to fragment the packets  
+```bash
+man nmap
+```
 
+Scan all ports:
 
-when we need more details about scan result we can use -vv for more details:  
-nmap -sX -p 1-999 10.67.131.211 -vv  
+```bash
+nmap -p- <target>
+```
 
+Scan port `80`:
 
+```bash
+nmap -p 80 <target>
+```
 
+`-T5`: Controls scan timing. A higher number is faster, but it may be less accurate or easier to detect.
 
+`-A`: Performs an aggressive and resource-intensive scan.
 
+`-oN`: Saves the output in normal format.
+
+```bash
+nmap -oN output.txt <target>
+```
+
+`-v`: Increases verbosity and shows more scan details.
+
+## Most Useful Scan Types
+
+`-sT`: TCP Connect Scan.
+
+```bash
+nmap -sT <target>
+```
+
+`-sS`: SYN or “Half-open” Scan. It is usually faster and requires `sudo`.
+
+```bash
+sudo nmap -sS <target>
+```
+
+`-sU`: UDP Scan. A result of `open|filtered` means that the port may be open, but a firewall may also be blocking the response.
+
+```bash
+sudo nmap -sU <target>
+```
+
+UDP scans are slow, so we can scan only the most common UDP ports:
+
+```bash
+sudo nmap -sU --top-ports 20 <target>
+```
+
+During TCP SYN scanning, there are usually three possible responses:
+
+* `SYN/ACK`: The port is open.
+* `RST`: The port is closed.
+* No response: The port is probably filtered by a firewall.
+
+The `-sS` scan is called half-open because it does not complete the full TCP connection.
+
+`-sN`, `-sF`, and `-sX` send TCP packets with unusual or empty flags. They may bypass some old or stateless firewalls, but they are not reliable against modern firewalls.
+
+`-sn`: Performs a ping sweep or host discovery scan.
+
+```bash
+nmap -sn 192.168.0.0/24
+```
+
+## Nmap Scripting Engine (NSE)
+
+NSE scripts are written in the Lua programming language.
+
+The following command runs all applicable scripts from the `safe` category:
+
+```bash
+nmap --script=safe <target>
+```
+
+Run specific SMB scripts:
+
+```bash
+nmap --script=smb-enum-users,smb-enum-shares <target>
+```
+
+Example:
+
+```bash
+nmap -p 80 --script http-put --script-args http-put.url='/dav/shell.php',http-put.file='./shell.php' <target>
+```
+
+Windows hosts may block ICMP packets by default. In this case, use `-Pn` to tell Nmap not to ping the host before scanning:
+
+```bash
+nmap -Pn <target>
+```
+
+Using `-Pn` may increase the scan time.
+
+On a local network, Nmap can also use ARP requests to determine whether a host is active.
+
+More details about firewall evasion:
+
+https://nmap.org/book/man-bypass-firewalls-ids.html
+
+`-f`: Fragments packets into smaller parts.
+
+```bash
+sudo nmap -f <target>
+```
+
+Use `-vv` when more details about the scan results are needed:
+
+```bash
+sudo nmap -sX -p 1-999 10.67.131.211 -vv
+```

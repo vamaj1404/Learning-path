@@ -662,3 +662,52 @@ nmap -p 1-1023 <target>
 | `-F`         | Scan the 100 most common ports |
 | `-p <range>` | Scan a specific port range     |
 | `-p-`        | Scan all ports                 |
+
+
+### OS Detection
+
+The `-O` option attempts to detect the target operating system.
+
+```bash
+sudo nmap -sS -O <target>
+```
+
+Nmap uses network responses to estimate the operating system. The result may not always be completely accurate.
+
+### Service and Version Detection
+
+The `-sV` option detects the services running on open ports and their versions.
+
+```bash
+sudo nmap -sS -sV <target>
+```
+
+Example result:
+
+```text
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu
+```
+
+### Aggressive Scan
+
+The `-A` option enables OS detection, service version detection, traceroute, and additional scanning features.
+
+```bash
+sudo nmap -A <target>
+```
+
+### Forcing the Scan
+
+Sometimes a target does not respond during host discovery, so Nmap marks it as offline. The `-Pn` option skips host discovery and treats the target as online.
+
+```bash
+nmap -Pn <target>
+```
+
+| Option | Description                                                          |
+| ------ | -------------------------------------------------------------------- |
+| `-O`   | OS detection                                                         |
+| `-sV`  | Service and version detection                                        |
+| `-A`   | OS detection, version detection, traceroute, and additional features |
+| `-Pn`  | Scan the target without host discovery                               |

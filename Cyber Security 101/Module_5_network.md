@@ -562,3 +562,13 @@ sudo tcpdump \
 ```
 
 Custom filters can be created by combining packet-length conditions, protocol-header offsets, comparison operators, and TCP flag masks.
+
+### 5- Displaying Packets
+
+Customizing how Tcpdump displays captured packets can make analysis more straightforward:
+
+`tcpdump -q`: Quick output with brief information.  
+`tcpdump -e`: Displays MAC addresses.  
+`tcpdump -A`: Shows packet contents in ASCII format.  
+`tcpdump -xx`: Displays packet data in hexadecimal format.  
+`tcpdump -X`: Shows both hexadecimal and ASCII formats.  

@@ -572,3 +572,93 @@ Customizing how Tcpdump displays captured packets can make analysis more straigh
 `tcpdump -A`: Shows packet contents in ASCII format.  
 `tcpdump -xx`: Displays packet data in hexadecimal format.  
 `tcpdump -X`: Shows both hexadecimal and ASCII formats.  
+
+## 7- nmap basics :
+`nmap -sL 192.168.0.1/24` will list the 256 targets that will be scanned
+## 7- Nmap Basics
+
+After discovering live hosts with `-sn`, Nmap can scan TCP and UDP ports to identify running network services.
+
+Common examples:
+
+* Web servers: TCP ports `80` and `443`
+* DNS servers: UDP or TCP port `53`
+
+TCP and UDP each support up to `65,535` ports.
+
+### TCP Connect Scan
+
+The `-sT` option performs a complete TCP three-way handshake.
+
+```bash
+nmap -sT <target>
+```
+
+* Open port: the connection is established.
+* Closed port: the target responds with an `RST` packet.
+
+### SYN Scan
+
+The `-sS` option sends a SYN packet without completing the TCP handshake.
+
+```bash
+sudo nmap -sS <target>
+```
+
+This scan is usually faster and generates fewer connection logs than a TCP Connect scan.
+
+* Open port: `SYN-ACK`
+* Closed port: `RST`
+
+### UDP Scan
+
+The `-sU` option scans UDP ports.
+
+```bash
+sudo nmap -sU <target>
+```
+
+UDP is used by services such as DNS, DHCP, NTP, SNMP, and VoIP. Closed UDP ports commonly respond with an ICMP Port Unreachable message.
+
+### Limiting Target Ports
+
+By default, Nmap scans the `1,000` most common ports.
+
+Scan the `100` most common ports:
+
+```bash
+nmap -F <target>
+```
+
+Scan a specific range:
+
+```bash
+nmap -p 10-1024 <target>
+```
+
+Scan ports `1` to `25`:
+
+```bash
+nmap -p-25 <target>
+```
+
+Scan all ports:
+
+```bash
+nmap -p- <target>
+```
+
+Scan well-known ports:
+
+```bash
+nmap -p 1-1023 <target>
+```
+
+| Option       | Description                    |
+| ------------ | ------------------------------ |
+| `-sT`        | TCP Connect scan               |
+| `-sS`        | TCP SYN scan                   |
+| `-sU`        | UDP scan                       |
+| `-F`         | Scan the 100 most common ports |
+| `-p <range>` | Scan a specific port range     |
+| `-p-`        | Scan all ports                 |

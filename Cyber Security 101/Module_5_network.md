@@ -413,7 +413,7 @@ sudo tcpdump -i any -nn
 
 This command captures packets on all network interfaces and displays IP addresses and port numbers in numeric form without performing DNS or service-name lookups.
 
-### Packet Filtering
+### 3- Packet Filtering
 
 Running `tcpdump` without filters may produce too much output to analyze effectively. Filters allow you to capture only the traffic related to a specific host, port, protocol, source, or destination.
 
@@ -481,3 +481,84 @@ The saved capture can be read with:
 tcpdump -r https.pcap -nn
 ```
 
+### 4-Advanced filtering
+
+Advanced filters allow `tcpdump` to select packets by length, header bytes, and TCP flags.
+
+#### Packet Length
+
+Use `greater LENGTH` or `less LENGTH` to capture packets above or below a specified size.
+
+```bash
+# Capture packets larger than 15,000 bytes
+sudo tcpdump -nn -r traffic.pcap 'greater 15000'
+```
+
+#### Binary Operations
+
+Header filters commonly use these bitwise operators:
+* `&` (**AND**) returns `1` only when both bits are `1`.
+* `|` (**OR**) returns `1` when at least one bit is `1`.
+* `!` (**NOT**) changes `1` to `0` and `0` to `1`.
+
+#### Filtering Header Bytes
+
+The `pcap-filter` syntax for accessing protocol header bytes is:
+
+```text
+proto[expr:size]
+```
+
+* `proto`: Protocol name, such as `arp`, `ether`, `icmp`, `ip`, `ip6`, `tcp`, or `udp`.
+* `expr`: Byte offset; `0` represents the first byte.
+* `size`: Number of bytes to read: `1`, `2`, or `4`. It is optional and defaults to `1`.
+
+Examples:
+
+```bash
+# Match Ethernet packets sent to a multicast address
+sudo tcpdump 'ether[0] & 1 != 0'
+
+# Match IPv4 packets containing IP options
+sudo tcpdump 'ip[0] & 0xf != 5'
+```
+
+The first filter checks the least significant bit of the first Ethernet-header byte. The second checks whether the IPv4 header length differs from the standard five 32-bit words.
+
+#### Filtering TCP Flags
+
+Use `tcp[tcpflags]` to access the TCP flags field.
+
+| Filter constant | Flag              |
+| --------------- | ----------------- |
+| `tcp-syn`       | SYN — Synchronize |
+| `tcp-ack`       | ACK — Acknowledge |
+| `tcp-fin`       | FIN — Finish      |
+| `tcp-rst`       | RST — Reset       |
+| `tcp-push`      | PSH — Push        |
+
+Use `==` when the specified flag must be the **only** flag set:
+
+```bash
+# Capture packets with only the SYN flag set
+sudo tcpdump 'tcp[tcpflags] == tcp-syn'
+
+# Count packets with only the RST flag set
+sudo tcpdump -r traffic.pcap 'tcp[tcpflags] == tcp-rst' | wc -l
+```
+
+Use bitwise AND when the specified flag may be set together with other flags:
+
+```bash
+# Capture packets where at least the SYN flag is set
+sudo tcpdump 'tcp[tcpflags] & tcp-syn != 0'
+
+# Capture packets where at least SYN or ACK is set
+sudo tcpdump 'tcp[tcpflags] & (tcp-syn|tcp-ack) != 0'
+
+# Capture packets where both SYN and ACK are set
+sudo tcpdump \
+  'tcp[tcpflags] & (tcp-syn|tcp-ack) == (tcp-syn|tcp-ack)'
+```
+
+Custom filters can be created by combining packet-length conditions, protocol-header offsets, comparison operators, and TCP flag masks.

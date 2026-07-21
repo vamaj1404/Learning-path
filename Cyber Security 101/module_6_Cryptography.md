@@ -96,4 +96,94 @@ Key options:
 
 GPU cracking is usually faster, so Hashcat performs best on the host system rather than inside a virtual machine. John the Ripper works well in VMs but may also run faster on the host.
 
+for identifying hash mode : `hashcat --indentify hash.txt`  
+
+**another usefull option**  
+`john hash3 -w=/usr/share/wordlists/rockyou.txt`  
+
+## 4- John the Ripper: The Basics
+
+Use **Jumbo John** when possible, as the core version may not include tools such as `zip2john` and `rar2john`.
+
+```bash
+sudo apt install john
+```
+
+RockYou and other leaked password lists can be found in SecLists:
+
+```text
+SecLists/Passwords/Leaked-Databases/
+```
+
+## Basic syntax:
+
+```bash
+john [options] [hash_file]
+```
+
+### Automatic Cracking
+
+```bash
+john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
+```
+
+John tries to detect the hash type automatically, but detection may be unreliable.
+
+### Identify the Hash
+
+```bash
+wget https://gitlab.com/kalilinux/packages/hash-identifier/-/raw/kali/master/hash-id.py
+python3 hash-id.py
+```
+`python3 hash-id.py`  
+
+### Crack With a Specific Format
+
+```bash
+john --format=raw-md5 \
+  --wordlist=/usr/share/wordlists/rockyou.txt \
+  hash.txt
+```
+
+List supported formats:
+
+```bash
+john --list=formats
+```
+
+Search for a format:
+
+```bash
+john --list=formats | grep -iF "md5"
+```
+### Cracking Linux `/etc/shadow` Hashes
+
+Linux password hashes are stored in `/etc/shadow`, which is normally readable only by `root`.
+
+John often needs both `/etc/passwd` and `/etc/shadow`. Combine them with `unshadow`:
+
+```bash
+unshadow local_passwd local_shadow > unshadowed.txt
+```
+
+Then crack the hashes:
+
+```bash
+john --wordlist=/usr/share/wordlists/rockyou.txt unshadowed.txt
+```
+
+For SHA-512 Crypt hashes:
+
+```bash
+john --format=sha512crypt \
+  --wordlist=/usr/share/wordlists/rockyou.txt \
+  unshadowed.txt
+```
+
+Show recovered passwords:
+
+```bash
+john --show --format=sha512crypt unshadowed.txt
+```
+
 

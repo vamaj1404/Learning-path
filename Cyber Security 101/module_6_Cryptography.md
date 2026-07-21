@@ -115,7 +115,7 @@ RockYou and other leaked password lists can be found in SecLists:
 SecLists/Passwords/Leaked-Databases/
 ```
 
-## Basic syntax:
+### Basic syntax:
 
 ```bash
 john [options] [hash_file]

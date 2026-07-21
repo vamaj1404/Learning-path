@@ -185,5 +185,73 @@ Show recovered passwords:
 ```bash
 john --show --format=sha512crypt unshadowed.txt
 ```
+### John Single Crack Mode
+
+Single Crack mode generates password guesses from usernames and GECOS information using word-mangling rules.
+
+Format the hash file like this:
+
+```text
+username:hash
+```
+
+Example:
+
+```text
+Joker:<HASH>
+```
+
+Run John:
+
+```bash
+john --single --format=raw-sha256 hashes.txt
+```
+
+This mode is useful when passwords may be based on the username or user details.
+
+### John Custom Rules
+
+Custom rules let John generate password candidates based on known password patterns.
+
+Rules are defined in:
+
+```text
+/opt/john/john.conf
+```
+
+or:
+
+```text
+/etc/john/john.conf
+```
+
+Example rule:
+
+```text
+[List.Rules:PoloPassword]
+cAz"[0-9][!£$%@]"
+```
+
+This rule:
+
+* capitalizes the first letter
+* appends a number
+* appends a symbol
+
+Run it with:
+
+```bash
+john --wordlist=/usr/share/wordlists/rockyou.txt \
+  --rules=PoloPassword \
+  hash.txt
+```
+
+Useful modifiers:
+
+```text
+c   Capitalize first letter
+Az  Append characters
+A0  Prepend characters
+```
 
 

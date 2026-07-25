@@ -1,6 +1,6 @@
 
 
-<div dir="rtl !important" align="right">
+<div dir="rtl" >
    
    # آموزش فارسی اتاق Metasploit: Meterpreter
 

@@ -1,4 +1,8 @@
-# آموزش فارسی اتاق Metasploit: Meterpreter
+
+
+<div dir="rtl !important" align="right">
+   
+   # آموزش فارسی اتاق Metasploit: Meterpreter
 
 این اتاق درباره‌ی **Meterpreter** است؛ یکی از مهم‌ترین Payloadهای Metasploit که معمولاً پس از نفوذ موفق، برای انجام فعالیت‌های Post-Exploitation استفاده می‌شود.
 
@@ -1478,3 +1482,6 @@ Meterpreter صرفاً یک Command Shell نیست. این Payload یک محیط
 * با `hashdump` می‌توان Hash حساب‌های محلی را در یک محیط مجاز استخراج کرد.
 * هدف Post-Exploitation، بررسی اثر واقعی دسترسی به‌دست‌آمده است.
 * استفاده از این ابزارها فقط روی آزمایشگاه‌ها یا سیستم‌هایی که مجوز صریح دارید قانونی و اخلاقی است.
+
+.
+</div>

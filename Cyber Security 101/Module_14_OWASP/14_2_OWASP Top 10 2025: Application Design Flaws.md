@@ -30,3 +30,6 @@ strange:
 
 <img width="1574" height="396" alt="image" src="https://github.com/user-attachments/assets/e687cf9a-6229-45e3-ae32-5339f967b1f9" />
 
+## Task 5 :
+
+<img width="983" height="510" alt="image" src="https://github.com/user-attachments/assets/77b61d1a-072c-4de3-ab0f-3853b2eca611" />
